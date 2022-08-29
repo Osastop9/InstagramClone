@@ -1,11 +1,11 @@
 import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
 
-const ProfilePicture = ({uri}) => {
+const ProfilePicture = ({uri, size = 70}) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {width: size + 6, height: size + 6}]}>
       <Image
-        style={styles.image}
+        style={[styles.image, {width: size, height: size}]}
         source={{
           uri: uri,
         }}
@@ -16,16 +16,12 @@ const ProfilePicture = ({uri}) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 76,
-    width: 76,
     margin: 7,
     borderRadius: 38,
     borderWidth: 3,
     borderColor: '#ae22e0',
   },
   image: {
-    height: 70,
-    width: 70,
     borderRadius: 40,
     borderWidth: 1,
     borderColor: '#ffffff',
