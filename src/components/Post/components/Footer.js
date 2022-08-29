@@ -1,17 +1,37 @@
-import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
+import {View, Text, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import React, {useState, useEffect} from 'react';
 
 import ADIcon from 'react-native-vector-icons/AntDesign';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import IonicIcon from 'react-native-vector-icons/Ionicons';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 
-const Footer = ({likesCount, caption, timePosted}) => {
+const Footer = ({likesCount: likesCountProp, caption, timePosted}) => {
+  const [isLiked, setIsLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(0);
+
+  const onLikePressed = () => {
+    const amount = isLiked ? -1 : 1;
+    setLikesCount(likesCount + amount);
+
+    setIsLiked(!isLiked);
+  };
+
+  useEffect(() => {
+    setLikesCount(likesCountProp);
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.iconContainer}>
         <View style={styles.leftIcons}>
-          <ADIcon name="hearto" size={25} color={'#545454'} />
+          <TouchableWithoutFeedback onPress={onLikePressed}>
+            {isLiked ? (
+              <ADIcon name="heart" size={25} color={'#e73838'} />
+            ) : (
+              <ADIcon name="hearto" size={25} color={'#545454'} />
+            )}
+          </TouchableWithoutFeedback>
           <FontistoIcon name="comment" size={23} color={'#545454'} />
           <IonicIcon name="paper-plane-outline" size={26} color={'#545454'} />
         </View>
