@@ -1,4 +1,4 @@
-import {View, FlatList} from 'react-native';
+import {View, FlatList, StyleSheet} from 'react-native';
 import React from 'react';
 import Story from './Story';
 
@@ -51,6 +51,7 @@ const Stories = () => {
       data={data}
       keyExtractor={({name}) => name}
       horizontal
+      style={styles.container}
       showsHorizontalScrollIndicator={false}
       renderItem={({item}) => (
         <Story imageUri={item.imageUri} name={item.name} />
@@ -59,4 +60,9 @@ const Stories = () => {
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 15,
+  },
+});
 export default Stories;
